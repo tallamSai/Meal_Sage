@@ -171,6 +171,54 @@ All colors MUST be HSL.
     from { box-shadow: 0 0 20px hsl(var(--primary-orange) / 0.3); }
     to { box-shadow: 0 0 40px hsl(var(--primary-orange) / 0.6), 0 0 60px hsl(var(--primary-green) / 0.3); }
   }
+
+  /* Mobile navigation animations */
+  .animate-in {
+    animation: slideIn 0.2s ease-out;
+  }
+
+  .slide-in-from-top-2 {
+    animation: slideInFromTop 0.2s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile-specific responsive utilities */
+  .mobile-nav-item {
+    @apply flex items-center space-x-3 w-full px-4 py-3 rounded-lg transition-all duration-200;
+  }
+
+  .mobile-nav-item:hover {
+    @apply bg-blue-50 dark:bg-blue-800/30;
+  }
+
+  /* Touch-friendly button sizes for mobile */
+  @media (max-width: 768px) {
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
 }
 
 .variable-proximity {
