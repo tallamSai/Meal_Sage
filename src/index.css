@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 60% 99%;
+    --foreground: 220 30% 10%;
+
+    --card: 210 100% 98%;
+    --card-foreground: 220 30% 10%;
+
+    --popover: 210 100% 98%;
+    --popover-foreground: 220 30% 10%;
+
+    --primary: 220 90% 56%;
+    --primary-foreground: 220 30% 98%;
+
+    --secondary: 210 100% 92%;
+    --secondary-foreground: 220 30% 10%;
+
+    --muted: 210 100% 96%;
+    --muted-foreground: 220 20% 40%;
+
+    --accent: 210 100% 92%;
+    --accent-foreground: 220 30% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 79 45% 45%;
+
+    --radius: 0.75rem;
+    
+    /* Custom food theme colors */
+    --primary-orange: 24 100% 60%;
+    --primary-green: 220 90% 56%; /* replaced green with blue */
+    --accent-purple: 252 77% 72%;
+    --accent-coral: 14 100% 72%;
+    --soft-peach: 25 100% 97%;
+    --warm-cream: 47 100% 98%;
+    --glass-white: 0 0% 100%;
+    --glass-overlay: 255 255 255;
+    
+    /* Enhanced Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary-orange)), hsl(var(--primary-green)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--soft-peach)), hsl(var(--warm-cream)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--glass-white) / 0.9), hsl(var(--glass-white) / 0.7));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent-purple)), hsl(var(--accent-coral)));
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    
+    /* Enhanced Shadows */
+    --shadow-elegant: 0 20px 60px -10px hsl(var(--primary-orange) / 0.25);
+    --shadow-card: 0 8px 32px -8px hsl(20 14.3% 4.1% / 0.15);
+    --shadow-glow: 0 0 50px hsl(var(--primary-orange) / 0.3);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
+  /* Glass morphism effects */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Enhanced hover effects */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  /* Pulse glow effect */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 20px hsl(var(--primary-orange) / 0.3); }
+    to { box-shadow: 0 0 40px hsl(var(--primary-orange) / 0.6), 0 0 60px hsl(var(--primary-green) / 0.3); }
+  }
+}
+
+.variable-proximity {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Custom scrollbar for scrollable cards */
+.scroll-stack-card, .scrollable-card {
+  scrollbar-width: thin;
+  scrollbar-color: #2563eb #e0e7ef;
+}
+.scroll-stack-card::-webkit-scrollbar, .scrollable-card::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #e0e7ef;
+  border-radius: 8px;
+}
+.scroll-stack-card::-webkit-scrollbar-thumb, .scrollable-card::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 8px;
+  min-height: 40px;
+}
+.scroll-stack-card::-webkit-scrollbar-thumb:hover, .scrollable-card::-webkit-scrollbar-thumb:hover {
+  background: #174ea6;
+}
+.scroll-stack-card::-webkit-scrollbar-corner, .scrollable-card::-webkit-scrollbar-corner {
+  background: #e0e7ef;
+}

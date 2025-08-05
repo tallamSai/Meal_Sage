@@ -1,0 +1,16 @@
+.squares-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  opacity: 0.5;
+  background: transparent;
+  transition: opacity 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .squares-canvas {
+    opacity: 0.7;
+  }
+} 

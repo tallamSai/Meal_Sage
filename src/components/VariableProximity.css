@@ -1,0 +1,8 @@
+.variable-proximity {
+  font-family: 'Inter var', 'Inter', Arial, sans-serif;
+  font-variation-settings: 'wght' 400, 'slnt' 0;
+  transition: font-variation-settings 0.2s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+  user-select: none;
+  will-change: font-variation-settings;
+} 
