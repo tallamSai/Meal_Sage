@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import ScanBarcode from "./pages/ScanBarcode";
 import Dashboard from "./pages/Dashboard";
+import RecipeGenerator from "./pages/RecipeGenerator";
 import ClickSpark from './components/ClickSpark';
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/scan-barcode" element={<ScanBarcode />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/recipes" element={<RecipeGenerator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

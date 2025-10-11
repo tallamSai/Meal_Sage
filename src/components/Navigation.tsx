@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Camera, Home, BarChart3, Menu, X, UserCircle, LogOut, LogIn, Mail, UserPlus, User } from 'lucide-react';
+import { Camera, Home, BarChart3, Menu, X, UserCircle, LogOut, LogIn, Mail, UserPlus, User, ChefHat } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { auth, googleProvider } from '@/lib/firebase';
@@ -65,6 +65,7 @@ const Navigation = () => {
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
+    { path: '/recipes', label: 'Recipes', icon: ChefHat },
     { path: '/analyze', label: 'Analyze', icon: Camera },
     { path: '/results', label: 'Results', icon: BarChart3 },
     { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -75,8 +76,8 @@ const Navigation = () => {
       {/* Desktop Navigation - Pill Shaped */}
       {!isMobile && (
         <nav
-          className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/60 dark:bg-blue-900/60 backdrop-blur-lg border border-white/30 dark:border-blue-300/20 shadow-2xl rounded-full px-20 py-2 w-auto max-w-6xl mx-auto mb-6 transition-all duration-500 overflow-hidden ${
-            isScrolled ? 'shadow-lg' : ''
+          className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-blue-900/80 backdrop-blur-lg border border-white/40 dark:border-blue-300/30 shadow-2xl rounded-full px-8 py-3 w-auto max-w-5xl mx-auto mb-6 transition-all duration-500 ${
+            isScrolled ? 'shadow-lg bg-white/90 dark:bg-blue-900/90' : ''
           }`}
         >
           <div className="flex items-center justify-between w-full gap-8">
@@ -107,22 +108,27 @@ const Navigation = () => {
                   </Link>
                 );
               })}
-              <div className="flex items-center space-x-4">
-                <span className="text-xs text-muted-foreground">🌞</span>
-                <Switch
-                  checked={theme === 'dark'}
-                  onCheckedChange={checked => setTheme(checked ? 'dark' : 'light')}
-                  aria-label="Toggle dark mode"
-                />
-                <span className="text-xs text-muted-foreground">🌙</span>
-                {/* User Dropdown - compact and inside capsule */}
+              <div className="flex items-center space-x-3">
+                {/* Theme Switch */}
+                <div className="flex items-center space-x-2 bg-white/50 dark:bg-blue-800/50 rounded-full px-3 py-1.5">
+                  <span className="text-xs text-muted-foreground">🌞</span>
+                  <Switch
+                    checked={theme === 'dark'}
+                    onCheckedChange={checked => setTheme(checked ? 'dark' : 'light')}
+                    aria-label="Toggle dark mode"
+                    className="scale-90"
+                  />
+                  <span className="text-xs text-muted-foreground">🌙</span>
+                </div>
+                
+                {/* User Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button className="rounded-full bg-blue-100 dark:bg-blue-800 p-1.5 hover:ring-2 ring-primary transition flex items-center">
+                    <button className="rounded-full bg-blue-100 dark:bg-blue-800 p-2 hover:ring-2 ring-primary transition flex items-center shadow-sm">
                       {user ? (
                         <User className="w-5 h-5 text-blue-700 dark:text-blue-200" />
                       ) : (
-                        <UserCircle className="w-5 h-5 text-blue-400 dark:text-blue-200" />
+                        <UserCircle className="w-5 h-5 text-blue-600 dark:text-blue-200" />
                       )}
                     </button>
                   </DropdownMenuTrigger>
@@ -203,23 +209,25 @@ const Navigation = () => {
               {/* Right side controls */}
               <div className="flex items-center space-x-2">
                 {/* Theme Switcher */}
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-2 bg-white/50 dark:bg-blue-800/50 rounded-full px-2 py-1">
+                  <span className="text-xs">🌞</span>
                   <Switch
                     checked={theme === 'dark'}
                     onCheckedChange={checked => setTheme(checked ? 'dark' : 'light')}
                     aria-label="Toggle dark mode"
-                    className="scale-90"
+                    className="scale-75"
                   />
+                  <span className="text-xs">🌙</span>
                 </div>
 
                 {/* User Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button className="rounded-full bg-blue-100 dark:bg-blue-800 p-1 hover:ring-2 ring-primary transition flex items-center">
+                    <button className="rounded-full bg-blue-100 dark:bg-blue-800 p-1.5 hover:ring-2 ring-primary transition flex items-center shadow-sm">
                       {user ? (
                         <User className="w-4 h-4 text-blue-700 dark:text-blue-200" />
                       ) : (
-                        <UserCircle className="w-4 h-4 text-blue-400 dark:text-blue-200" />
+                        <UserCircle className="w-4 h-4 text-blue-600 dark:text-blue-200" />
                       )}
                     </button>
                   </DropdownMenuTrigger>

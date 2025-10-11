@@ -67,19 +67,36 @@ const Analyze = () => {
       });
       // Save to Firestore if user is logged in
       if (currentUser && selectedFile) {
-        // Upload image to Firebase Storage
-        const imageRef = ref(storage, `user_uploads/${currentUser.uid}/${Date.now()}_${selectedFile.name}`);
-        await uploadBytes(imageRef, selectedFile);
-        const imageUrl = await getDownloadURL(imageRef);
-        const docData = {
-          uid: currentUser.uid,
-          ...result,
-          imageUrl,
-          createdAt: serverTimestamp(),
-          createdAtClient: new Date().toISOString(),
-        };
-        console.log('Saving analysis to Firestore for user:', currentUser.uid, docData);
-        await addDoc(collection(db, 'analyses'), docData);
+        try {
+          // Upload image to Firebase Storage
+          const imageRef = ref(storage, `user_uploads/${currentUser.uid}/${Date.now()}_${selectedFile.name}`);
+          await uploadBytes(imageRef, selectedFile);
+          const imageUrl = await getDownloadURL(imageRef);
+          const docData = {
+            uid: currentUser.uid,
+            ...result,
+            imageUrl,
+            createdAt: serverTimestamp(),
+            createdAtClient: new Date().toISOString(),
+          };
+          console.log('Saving analysis to Firestore for user:', currentUser.uid, docData);
+          await addDoc(collection(db, 'analyses'), docData);
+        } catch (storageError) {
+          console.error('Storage upload error:', storageError);
+          // Still save to Firestore without image URL
+          const docData = {
+            uid: currentUser.uid,
+            ...result,
+            createdAt: serverTimestamp(),
+            createdAtClient: new Date().toISOString(),
+          };
+          await addDoc(collection(db, 'analyses'), docData);
+          toast({
+            title: 'Analysis saved',
+            description: 'Analysis completed but image upload failed. Please check Firebase Storage permissions.',
+            variant: 'destructive',
+          });
+        }
       }
     } catch (error) {
       toast({
